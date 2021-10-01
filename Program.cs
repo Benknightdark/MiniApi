@@ -1,9 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<HelloService>(new HelloService());
-
+builder.Services.AddScoped<HelloService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-app.MapGet("/hello", (HttpContext context, HelloService helloService) =>
-helloService.SayHello(context.Request.Query["name"].ToString()));
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.Run();
+
+app.MapGet("/hello", (HttpContext context, HelloService helloService) =>
+    helloService.SayHello(context.Request.Query["name"].ToString())
+    );
+await app.RunAsync();
