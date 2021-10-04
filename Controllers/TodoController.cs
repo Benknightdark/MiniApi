@@ -6,6 +6,8 @@ namespace MiniApi.Controllers
     {
         public static void AddTodo(this WebApplication app)
         {
+
+            
             app.MapGet("/todos",async (TodoDbContext db) =>
             {
                 return await db.Todos.ToListAsync();

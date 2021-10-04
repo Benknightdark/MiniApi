@@ -13,9 +13,9 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapGet("/hello", (HttpContext context, HelloService helloService) =>
-    helloService.SayHello(context.Request.Query["name"].ToString())
-    );
+// app.MapGet("/hello", (HttpContext context, HelloService helloService) =>
+//     helloService.SayHello(context.Request.Query["name"].ToString())
+//     );
 
 app.AddTodo();
 await app.RunAsync();
